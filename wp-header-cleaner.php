@@ -46,7 +46,7 @@ if( ! class_exists( 'WP_Header_Cleaner' ) ) {
 
             foreach ( $this->settings->data as $setting => $priority ) {
                 $item = explode( '-', $setting );
-
+                
                 if( 1 == get_option( $setting ) )
                 {
                     if( 0 !== $priority ) {
