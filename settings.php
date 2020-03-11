@@ -4,12 +4,12 @@ if( !class_exists( 'WP_Header_Cleaner_Settings' ) )
 	class WP_Header_Cleaner_Settings
 	{
 
-		/**
-		 * Construct the plugin settings object
+        /**
+         * Construct the plugin settings object
          *
          * @param array $settings_list
          * @return void
-		 */
+         */
 		public function __construct( array $settings_list )
 		{
             $this->data = $settings_list;
