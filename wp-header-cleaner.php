@@ -21,7 +21,7 @@ if( ! class_exists( 'WP_Header_Cleaner' ) ) {
          * @var WP_Header_Cleaner_Settings
          */
         protected $settings;
-		
+
         /**
          * Construct the plugin object
          *
@@ -32,7 +32,7 @@ if( ! class_exists( 'WP_Header_Cleaner' ) ) {
         {
             $this->settings = $settings;   
         }
-        
+
         /**
          * Init plugin
          *
@@ -57,7 +57,7 @@ if( ! class_exists( 'WP_Header_Cleaner' ) ) {
                 }
             }
         }
-        
+
         /**
          * Activate the plugin
          *
@@ -67,7 +67,7 @@ if( ! class_exists( 'WP_Header_Cleaner' ) ) {
         {
             // do something
         }
-    
+
         /**
          * Deactivate the plugin
          *
@@ -87,7 +87,7 @@ if( ! class_exists( 'WP_Header_Cleaner' ) ) {
         {
             // do something
         }
-        
+
         /**
          * Add plugin settings link
          *
@@ -126,7 +126,7 @@ if( class_exists( 'WP_Header_Cleaner' ) )
     register_deactivation_hook( __FILE__, array( 'WP_Header_Cleaner', 'on_deactivation' ) );
     register_uninstall_hook(    __FILE__, array( 'WP_Header_Cleaner', 'on_uninstall' ) );
 
-	// Instantiate the settings class
+    // Instantiate the settings class
     $wp_header_cleaner_settings = new WP_Header_Cleaner_Settings([
         'wp_head-wp_generator' => 0,
         'wp_head-feed_links' => 2,
@@ -141,7 +141,7 @@ if( class_exists( 'WP_Header_Cleaner' ) )
         'wp_head-wp_shortlink_wp_head' => 10,
         'wp_print_styles-print_emoji_styles' => 0,
     ]);
-	
+
     // Instantiate the plugin class
     $wp_header_cleaner = new WP_Header_Cleaner( $wp_header_cleaner_settings );
     // Init plugin

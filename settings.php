@@ -3,6 +3,7 @@ if( !class_exists( 'WP_Header_Cleaner_Settings' ) )
 {
 	class WP_Header_Cleaner_Settings
 	{
+
 		/**
 		 * Construct the plugin settings object
          *
@@ -63,7 +64,7 @@ if( !class_exists( 'WP_Header_Cleaner_Settings' ) )
         }
 
         /**
-         * This function provides text inputs for settings fields
+         * This function provides inputs for settings fields
          *
          * @param array $args
          * @return void
