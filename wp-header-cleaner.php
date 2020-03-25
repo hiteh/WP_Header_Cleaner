@@ -119,31 +119,38 @@ if( ! class_exists( 'WP_Header_Cleaner' ) ) {
 if( class_exists( 'WP_Header_Cleaner' ) )
 {
     // Plugin settings
-    require_once(sprintf("%s/settings.php", dirname(__FILE__)));
+    require_once( sprintf("%s/settings.php", dirname(__FILE__) ) );
 
-    // Hooks registration
-    register_activation_hook(   __FILE__, array( 'WP_Header_Cleaner', 'on_activation' ) );
-    register_deactivation_hook( __FILE__, array( 'WP_Header_Cleaner', 'on_deactivation' ) );
-    register_uninstall_hook(    __FILE__, array( 'WP_Header_Cleaner', 'on_uninstall' ) );
-
-    // Instantiate the settings class
-    $wp_header_cleaner_settings = new WP_Header_Cleaner_Settings([
-        'wp_head-wp_generator' => 0,
-        'wp_head-feed_links' => 2,
-        'wp_head-feed_links_extra' => 3,
-        'wp_head-rsd_link' => 0,
-        'wp_head-wlwmanifest_link' => 0,
-        'wp_head-wp_resource_hints' => 2,
-        'wp_head-print_emoji_detection_script' => 7,
-        'wp_head-rest_output_link_wp_head' => 0,
-        'wp_head-wp_oembed_add_discovery_links' => 0,
-        'wp_head-rel_canonical' => 0,
-        'wp_head-wp_shortlink_wp_head' => 10,
-        'wp_print_styles-print_emoji_styles' => 0,
-    ]);
+    global $wp_header_cleaner;
 
     // Instantiate the plugin class
-    $wp_header_cleaner = new WP_Header_Cleaner( $wp_header_cleaner_settings );
+    $wp_header_cleaner = new WP_Header_Cleaner ( 
+        new WP_Header_Cleaner_Settings ( 
+            [   // Action                               //Priority
+                'wp_head-wp_generator'                  => 0,
+                'wp_head-feed_links'                    => 2,
+                'wp_head-feed_links_extra'              => 3,
+                'wp_head-rsd_link'                      => 0,
+                'wp_head-wlwmanifest_link'              => 0,
+                'wp_head-wp_resource_hints'             => 2,
+                'wp_head-print_emoji_detection_script'  => 7,
+                'wp_head-rest_output_link_wp_head'      => 0,
+                'wp_head-wp_oembed_add_discovery_links' => 0,
+                'wp_head-rel_canonical'                 => 0,
+                'wp_head-wp_shortlink_wp_head'          => 10,
+                'wp_print_styles-print_emoji_styles'    => 0,
+            ] 
+        ) 
+    );
     // Init plugin
     $wp_header_cleaner->init();
+
+    // Start this plugin once all other plugins are fully loaded
+    add_action( 'init', 'WP_Header_Cleaner_Run', 99 );
+    
+    function WP_Header_Cleaner_Run() {
+        register_activation_hook(   __FILE__, array( 'WP_Header_Cleaner', 'on_activation' ) );
+        register_deactivation_hook( __FILE__, array( 'WP_Header_Cleaner', 'on_deactivation' ) );
+        register_uninstall_hook(    __FILE__, array( 'WP_Header_Cleaner', 'on_uninstall' ) );
+    }
 }
